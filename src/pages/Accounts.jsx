@@ -400,7 +400,7 @@ function Accounts() {
             <CardAccounts
               stylePayments="hidden"
               styleDate="text-lg"
-              link="/account"
+              link={`/account/${account.id}`}
               title="Account number:"
               content={account.number}
               amount={account.balance}

@@ -28,7 +28,7 @@ function App() {
             <Route path="/cards" element={<Cards />}></Route>
             <Route path="/loans" element={<Loans />}></Route>
             <Route path="/transactions" element={<MakeTransaction />}></Route>
-            <Route path="/account" element={<Account />}></Route>
+            <Route path="/account/:id" element={<Account />}></Route>
           </Route>
 
           <Route path="/" element={<OnlyFooter />}>

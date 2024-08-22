@@ -1,6 +1,6 @@
 import React from "react";
 
-function Table({ transactions }) {
+function Table({ transactions = [] }) {
   return (
     <table>
       <thead>
