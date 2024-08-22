@@ -1,0 +1,17 @@
+table,
+tbody,
+th,
+td,
+tr {
+  border: 3px solid black;
+  background-color: #f2c036;
+  width: 40vw;
+  padding: 16px;
+  font-weight: bold;
+}
+
+thead,
+th {
+  background-color: #16374e;
+  color: white;
+}
