@@ -1,16 +1,11 @@
 import React from "react";
 
-function InputRadioContainer({ children, spanText }) {
+function InputRadioContainer({ children }) {
   return (
-    <div className="flex justify-between font-bold text-xl mb-4">
-      <span>{spanText}</span>
+    <div className="flex justify-start gap-16 font-bold text-xl mb-4">
       {children}
     </div>
   );
 }
 
 export default InputRadioContainer;
-
-{
-  /* <span>Destination type:</span> */
-}

@@ -7,8 +7,7 @@ function InputContainer({
   inputStyle,
   inputType,
   inputPlaceholder,
-  max,
-  min,
+  onChange,
 }) {
   return (
     <label className={labelStyle} htmlFor={labelInputForId}>
@@ -19,8 +18,7 @@ function InputContainer({
         id={labelInputForId}
         placeholder={inputPlaceholder}
         name={labelInputForId}
-        max={max}
-        min={min}
+        onChange={onChange}
       />
     </label>
   );

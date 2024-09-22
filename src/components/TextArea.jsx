@@ -1,9 +1,16 @@
 import React from "react";
 
-function TextArea({ labelAreaForId, labelTitle, rows, cols, placeholder }) {
+function TextArea({
+  labelAreaForId,
+  labelTitle,
+  rows,
+  cols,
+  placeholder,
+  onChange,
+}) {
   return (
     <label
-      className="flex flex-col gap-2 font-bold text-xl"
+      className="flex flex-col gap-2 font-bold text-xl h-[20vh] w-[30vw]"
       for={labelAreaForId}
     >
       {labelTitle}
@@ -14,6 +21,7 @@ function TextArea({ labelAreaForId, labelTitle, rows, cols, placeholder }) {
         rows={rows}
         cols={cols}
         placeholder={placeholder}
+        onChange={onChange}
       ></textarea>
     </label>
   );

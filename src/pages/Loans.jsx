@@ -1,297 +1,85 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardButtomContainer from "../components/CardButtomContainer";
 import CardContainer from "../components/CardContainer";
 import RequestButtom from "../components/RequestButtom";
 import CardAccounts from "../components/CardAccounts";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loadLoans } from "../redux/actions/loanAction";
+import BannerTextImg from "../components/BannerTextImg";
+import ImgButtom from "../components/ImgButtom";
 
 function Loans() {
-  const [clients, setClients] = useState([
-    {
-      id: 1,
-      name: "Will",
-      lastName: "Ocanto",
-      email: "will90@gmail.com",
-      accounts: [
-        {
-          id: 1,
-          number: "VIN001",
-          balance: "100000.0",
-          creationDate: "01/01/2021",
-          transactions: [
-            {
-              id: 1,
-              transactionType: "CREDIT",
-              amount: 25000.0,
-              dateTransaction: "02/03/2023",
-              description: "Payment",
-            },
-            {
-              id: 2,
-              transactionType: "DEBIT",
-              amount: -4500.0,
-              dateTransaction: "02/06/2023",
-              description: "Test credit",
-            },
-            {
-              id: 3,
-              transactionType: "DEBIT",
-              amount: -1500.0,
-              dateTransaction: "06/23/2023",
-              description: "Cable payment",
-            },
-          ],
-        },
-        {
-          id: 2,
-          number: "VIN002",
-          balance: "200000.0",
-          creationDate: "01/02/2023",
-          transactions: [
-            {
-              id: 4,
-              transactionType: "CREDIT",
-              amount: 12300.0,
-              dateTransaction: "11/03/2022",
-              description: "Salary",
-            },
-            {
-              id: 5,
-              transactionType: "CREDIT",
-              amount: 4500.0,
-              dateTransaction: "12/06/2023",
-              description: "Refund",
-            },
-            {
-              id: 6,
-              transactionType: "DEBIT",
-              amount: -1500.0,
-              dateTransaction: "08/23/2023",
-              description: "Taxes",
-            },
-          ],
-        },
-      ],
-      loans: [
-        {
-          id: 3,
-          loanid: 2,
-          name: "Personal",
-          amount: " 1000.0",
-          payments: 60,
-        },
-        {
-          id: 4,
-          loanid: 3,
-          name: "Mortgage",
-          amount: " 2000.0",
-          payments: 36,
-        },
-      ],
-      cards: [
-        {
-          id: 3,
-          cardHolder: "Will Ocanto",
-          cardColor: "TITANIUM",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "123",
-          fromDate: "01/01/2025",
-          thruDate: "01/01/2027",
-        },
-        {
-          id: 4,
-          cardHolder: "Will Ocanto",
-          cardColor: "GOLD",
-          cardType: "DEBIT",
-          cardNumber: "1234-8552-29946-1234",
-          cvv: "456",
-          fromDate: "08/11/2025",
-          thruDate: "03/01/2027",
-        },
-        {
-          id: 5,
-          cardHolder: "Will Ocanto",
-          cardColor: "SILVER",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "789",
-          fromDate: "12/01/2025",
-          thruDate: "08/01/2027",
-        },
-        {
-          id: 6,
-          cardHolder: "Will Ocanto",
-          cardColor: "GOLD",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "345",
-          fromDate: "05/09/2025",
-          thruDate: "08/21/2027",
-        },
-        {
-          id: 7,
-          cardHolder: "Will Ocanto",
-          cardColor: "TITANIUM",
-          cardType: "DEBIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "901",
-          fromDate: "01/01/2025",
-          thruDate: "01/01/2027",
-        },
-        {
-          id: 8,
-          cardHolder: "Will Ocanto",
-          cardColor: "SILVER",
-          cardType: "DEBIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "223",
-          fromDate: "12/01/2025",
-          thruDate: "08/01/2027",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "Melba",
-      lastName: "Morel",
-      email: "melba@mindhub.com",
-      accounts: [
-        {
-          id: 3,
-          number: "VIN003",
-          balance: "50000.0",
-          creationDate: "09/21/2021",
-          transactions: [
-            {
-              id: 7,
-              transactiontype: "CREDIT",
-              amount: 25000.0,
-              dateTransaction: "12/03/2023",
-              description: "Payment",
-            },
-            {
-              id: 8,
-              transactiontype: "DEBIT",
-              amount: -7500.0,
-              dateTransaction: "02/06/2023",
-              description: "Test credit",
-            },
-            {
-              id: 9,
-              transactiontype: "DEBIT",
-              amount: -8500.0,
-              dateTransaction: "12/05/2023",
-              description: "Cable payment",
-            },
-          ],
-        },
-        {
-          id: 4,
-          number: "VIN004",
-          balance: "200000.0",
-          creationDate: "03/29/2023",
-          transactions: [
-            {
-              id: 10,
-              transactiontype: "CREDIT",
-              amount: 123000.0,
-              dateTransaction: "01/03/2022",
-              description: "Cable",
-            },
-            {
-              id: 11,
-              transactiontype: "DEBIT",
-              amount: -45000.0,
-              dateTransaction: "05/16/2023",
-              description: "Food shopping",
-            },
-            {
-              id: 12,
-              transactiontype: "CREDIT",
-              amount: 11500.0,
-              dateTransaction: "08/23/2023",
-              description: "Debt payment",
-            },
-          ],
-        },
-      ],
-      loans: [
-        {
-          id: 2,
-          loanid: 2,
-          name: "Personal",
-          amount: "10000.0",
-          payments: 12,
-          creationDate: "01/01/2021",
-        },
-        {
-          id: 1,
-          loanid: 1,
-          name: "Automotive",
-          amount: "200000.0",
-          payments: 6,
-          creationDate: "01/01/2023",
-        },
-      ],
-      cards: [
-        {
-          id: 2,
-          cardHolder: "Melba Morel",
-          cardColor: "TITANIUM",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "123",
-          fromDate: "01/01/2025",
-          thruDate: "01/01/2027",
-        },
-        {
-          id: 1,
-          cardHolder: "Melba Morel",
-          cardColor: "GOLD",
-          cardType: "DEBIT",
-          cardNumber: "1234-8552-29946-1234",
-          cvv: "456",
-          fromDate: "08/11/2025",
-          truDate: "03/01/2027",
-        },
-      ],
-    },
-  ]);
+  const allLoans = useSelector((state) => state.loanReducer.availableLoans);
+  const dispatch = useDispatch();
 
-  const [clientId, setClientId] = useState(2);
+  console.log(allLoans);
+
+  useEffect(() => {
+    dispatch(loadLoans());
+  }, [dispatch]);
+
   return (
-    <main className="border border-solid min-h-[calc(100vh-23vh)] bg-[#48a6f4]">
-      <h1 className="border border-solid border-[#f2c036] text-4xl font-bold text-center mt-8 bg-[#16374e] text-white w-[40vw] py-2 text-center mx-auto my-10 shadow-[8px_8px_6px_rgba(0,0,0,0.7)] rounded-xl">
+    <main className="border border-solid min-h-[calc(100vh-23vh)] bg-[#D9D9D9]">
+      <h1 className="text-shadow border-2 border-solid border-[#4C4C4A] underline text-4xl font-bold text-center bg-[#16374e] text-white w-[23vw] h-[10vh] py-1 text-center mx-auto my-6 rounded-lg">
         Your Loans
       </h1>
-      <CardButtomContainer className="flex justify-center intems-center w-[100vw] my-14">
-        <div className="flex flex-col justify-center items-center gap-20 w-[550px]">
-          <Link to="/apply-loan">
-            <RequestButtom
-              className=" border border-solid border-white bg-[#f2c036] text-black font-bold shadow-[7px_7px_5px_rgba(0,0,0,0.7)] transition-colors duration-[0.5s] hover:bg-[#16374e] hover:text-gray-100 hover:border-[#f2c036] hover:border-4 transition-transform hover:translate-y-1 py-3 px-4 text-xl rounded-xl"
-              text="Apply loan"
-            />
-          </Link>
-          <img
-            className="w-[550px] h-[330px] border border-solid border-white rounded-xl shadow-[7px_7px_5px_rgba(0,0,0,0.7)]"
-            src="./img-loan.jpg"
-            alt="banner"
-          />
-        </div>
+      <CardButtomContainer className="flex flex-col justify-center intems-center w-[95vw] my-8 mx-auto gap-10">
+        <BannerTextImg
+          ContainerStyle="flex justify-center items-center gap-32 px-16 w-[95vw] h-[53vh] border-t-2 border-b-2 border-solid border-black  bg-[#16374e] text-white rounded-xl mx-auto"
+          ContainerTextStyle="flex flex-col gap-6 items-center"
+          titleStyle="text-2xl w-[30vw] font-bold underline"
+          title="We offer financial solutions adapted to your needs."
+          textStyle="text-lg w-[30vw]"
+          text="Whether it's for a vehicle, a personal project, or your ideal home, you'll find flexible options here. Next, you can explore the loans available to help you take control of your financial future."
+          ulStyle="hidden"
+        >
+          <ImgButtom
+            imgStyle="w-[30vw] h-[35vh] border-2 border-solid border-[#4C4C4A] rounded-xl shadow-[7px_7px_5px_rgba(0,0,0,0.7)]"
+            imgSrc="./img-loan.jpg"
+            imgAlt="img-loan"
+          >
+            {Array.isArray(allLoans) && allLoans.length > 0 && (
+              <Link to="/apply-loan">
+                <RequestButtom
+                  className=" border border-solid border-[#4C4C4A] bg-[#A1ADAD] w-[15vw] h-[8vh] text-black font-bold shadow-[6px_7px_3px_rgba(0,0,0,0.9)] transition-colors duration-[0.7s] hover:border-2 transition-transform hover:translate-y-[-10px]  text-xl rounded-3xl"
+                  text="Apply loan"
+                />
+              </Link>
+            )}
+          </ImgButtom>
+        </BannerTextImg>
 
-        <CardContainer className="flex flex-col justify-center items-center gap-16 flex-wrap w-[600px]">
-          {clients[clientId - 1].loans.map((loan) => (
-            <CardAccounts
-              title="Type of Loan:"
-              styleDate="hidden"
-              stylePayments="text-lg"
-              payments={loan.payments}
-              content={loan.name}
-              amount={loan.amount}
-              creationDate={loan.creationDate}
-            />
-          ))}
+        <CardContainer className="flex justify-center items-center gap-16 flex-wrap w-[90vw] mx-auto">
+          {Array.isArray(allLoans) && allLoans.length > 0 ? (
+            allLoans.map((loan) => {
+              const formattedMaxAmount = loan.maxAmount.toLocaleString(
+                "en-US",
+                {
+                  style: "decimal",
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              );
+              return (
+                <CardAccounts
+                  title="Type of Loan:"
+                  styleDate="hidden"
+                  stylePayments="text-xl"
+                  divSize="w-[300px] h-[280px] transition-transform hover:translate-y-[-17px] transition-colors duration-[0.7s]"
+                  balanceOrAmount="Max. Amount:"
+                  showLink={false}
+                  payments={loan.payments.join(", ")}
+                  content={loan.name}
+                  amount={formattedMaxAmount}
+                />
+              );
+            })
+          ) : (
+            <p className="text-center text-red-700 font-bold text-xl">
+              {allLoans}
+            </p>
+          )}
         </CardContainer>
       </CardButtomContainer>
     </main>

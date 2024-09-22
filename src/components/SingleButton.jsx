@@ -11,7 +11,9 @@ function SingleButton({
 }) {
   return (
     <div className={containerStyle}>
-      <button className={buttonStyle}>{buttonText}</button>
+      <button type="submit" className={buttonStyle}>
+        {buttonText}
+      </button>
       <span>o</span>
       <div>
         <Link to={link}>

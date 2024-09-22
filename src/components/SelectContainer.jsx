@@ -19,7 +19,7 @@ function SelectContainer({
         id={labelSelectForId}
         onChange={onChange}
       >
-        <option value="select" selected>
+        <option value="" selected>
           {optionExample}
         </option>
         {arrayItems.map((item) => (

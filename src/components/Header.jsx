@@ -4,7 +4,7 @@ import ImgLogo from "../components/imgLogo";
 
 function Header() {
   return (
-    <header className="relative flex justify-center items-center border-b-2 border-[#f2c036] border-solid h-[21vh] bg-[#16374e]">
+    <header className="relative flex justify-center items-center border-b border-white border-solid h-[21vh] bg-[#16374e]">
       <ImgLogo />
       <Nav />
     </header>

@@ -2,8 +2,10 @@ import React from "react";
 
 function RequestButtom(props) {
   return (
-    <div>
-      <button className={props.className}>{props.text}</button>
+    <div className="justify-center">
+      <button onClick={props.onClick} className={props.className}>
+        {props.text}
+      </button>
     </div>
   );
 }

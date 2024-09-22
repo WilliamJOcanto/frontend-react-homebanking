@@ -1,434 +1,150 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardButtomContainer from "../components/CardButtomContainer";
 import RequestButtom from "../components/RequestButtom";
 import CardContainer from "../components/CardContainer";
 import CardAccounts from "../components/CardAccounts";
-import "../styles/accounts-styles.css";
-import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { loadUser, updateAccounts } from "../redux/actions/userAction";
+import Modal from "../components/Modal";
+import BannerTextImg from "../components/BannerTextImg";
+import ImgButtom from "../components/ImgButtom";
+import "../styles/textSahdow.css";
 function Accounts() {
-  // const [accounts, setAcoounts] = useState([
-  //   {
-  //     id: 1,
-  //     number: "VIN001",
-  //     balance: "100000.0",
-  //     creationDate: "01/01/2021",
-  //     transactions: [
-  //       {
-  //         id: 1,
-  //         transactionType: "CREDIT",
-  //         amount: 25000.0,
-  //         dateTransaction: "02/03/2023",
-  //         description: "Payment",
-  //       },
-  //       {
-  //         id: 2,
-  //         transactionType: "DEBIT",
-  //         amount: -4500.0,
-  //         dateTransaction: "02/06/2023",
-  //         description: "Test credit",
-  //       },
-  //       {
-  //         id: 3,
-  //         transactionType: "DEBIT",
-  //         amount: -1500.0,
-  //         dateTransaction: "06/23/2023",
-  //         description: "Cable payment",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     number: "VIN002",
-  //     balance: "200000.0",
-  //     creationDate: "01/02/2023",
-  //     transactions: [
-  //       {
-  //         id: 4,
-  //         transactionType: "CREDIT",
-  //         amount: 12300.0,
-  //         dateTransaction: "11/03/2022",
-  //         description: "Salary",
-  //       },
-  //       {
-  //         id: 5,
-  //         transactionType: "CREDIT",
-  //         amount: 4500.0,
-  //         dateTransaction: "12/06/2023",
-  //         description: "Refund",
-  //       },
-  //       {
-  //         id: 6,
-  //         transactionType: "DEBIT",
-  //         amount: -1500.0,
-  //         dateTransaction: "08/23/2023",
-  //         description: "Taxes",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     number: "VIN003",
-  //     balance: "50000.0",
-  //     creationDate: "09/21/2021",
-  //     transactions: [
-  //       {
-  //         id: 7,
-  //         transactiontype: "CREDIT",
-  //         amount: 25000.0,
-  //         dateTransaction: "12/03/2023",
-  //         description: "Payment",
-  //       },
-  //       {
-  //         id: 8,
-  //         transactiontype: "DEBIT",
-  //         amount: -7500.0,
-  //         dateTransaction: "02/06/2023",
-  //         description: "Test credit",
-  //       },
-  //       {
-  //         id: 9,
-  //         transactiontype: "DEBIT",
-  //         amount: -8500.0,
-  //         dateTransaction: "12/05/2023",
-  //         description: "Cable payment",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 4,
-  //     number: "VIN004",
-  //     balance: "200000.0",
-  //     creationDate: "03/29/2023",
-  //     transactions: [
-  //       {
-  //         id: 10,
-  //         transactiontype: "CREDIT",
-  //         amount: 123000.0,
-  //         dateTransaction: "01/03/2022",
-  //         description: "Cable",
-  //       },
-  //       {
-  //         id: 11,
-  //         transactiontype: "DEBIT",
-  //         amount: -45000.0,
-  //         dateTransaction: "05/16/2023",
-  //         description: "Food shopping",
-  //       },
-  //       {
-  //         id: 12,
-  //         transactiontype: "CREDIT",
-  //         amount: 11500.0,
-  //         dateTransaction: "08/23/2023",
-  //         description: "Debt payment",
-  //       },
-  //     ],
-  //   },
-  // ]);
+  const client = useSelector((state) => state.userReducer.userData);
+  const [message, setMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [visible, setVisible] = useState(true);
 
-  // const [accountId, setAccountId] = useState(1);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
-  const [clients, setClients] = useState([
-    {
-      id: 1,
-      name: "Will",
-      lastName: "Ocanto",
-      email: "will90@gmail.com",
-      accounts: [
-        {
-          id: 1,
-          number: "VIN001",
-          balance: "100000.0",
-          creationDate: "01/01/2021",
-          transactions: [
-            {
-              id: 1,
-              transactionType: "CREDIT",
-              amount: 25000.0,
-              dateTransaction: "02/03/2023",
-              description: "Payment",
-            },
-            {
-              id: 2,
-              transactionType: "DEBIT",
-              amount: -4500.0,
-              dateTransaction: "02/06/2023",
-              description: "Test credit",
-            },
-            {
-              id: 3,
-              transactionType: "DEBIT",
-              amount: -1500.0,
-              dateTransaction: "06/23/2023",
-              description: "Cable payment",
-            },
-          ],
-        },
-        {
-          id: 2,
-          number: "VIN002",
-          balance: "200000.0",
-          creationDate: "01/02/2023",
-          transactions: [
-            {
-              id: 4,
-              transactionType: "CREDIT",
-              amount: 12300.0,
-              dateTransaction: "11/03/2022",
-              description: "Salary",
-            },
-            {
-              id: 5,
-              transactionType: "CREDIT",
-              amount: 4500.0,
-              dateTransaction: "12/06/2023",
-              description: "Refund",
-            },
-            {
-              id: 6,
-              transactionType: "DEBIT",
-              amount: -1500.0,
-              dateTransaction: "08/23/2023",
-              description: "Taxes",
-            },
-          ],
-        },
-      ],
-      loans: [
-        {
-          id: 3,
-          loanid: 2,
-          name: "Personal",
-          amount: "$ 100.0",
-          payments: 12,
-        },
-        {
-          id: 4,
-          loanid: 3,
-          name: "Automotive",
-          amount: "$ 200.0",
-          payments: 36,
-        },
-      ],
-      cards: [
-        {
-          id: 3,
-          cardHolder: "Will Ocanto",
-          cardColor: "TITANIUM",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "123",
-          fromDate: "01/01/2025",
-          thruDate: "01/01/2027",
-        },
-        {
-          id: 4,
-          cardHolder: "Will Ocanto",
-          cardColor: "GOLD",
-          cardType: "DEBIT",
-          cardNumber: "1234-8552-29946-1234",
-          cvv: "456",
-          fromDate: "08/11/2025",
-          thruDate: "03/01/2027",
-        },
-        {
-          id: 5,
-          cardHolder: "Will Ocanto",
-          cardColor: "SILVER",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "789",
-          fromDate: "12/01/2025",
-          thruDate: "08/01/2027",
-        },
-        {
-          id: 6,
-          cardHolder: "Will Ocanto",
-          cardColor: "GOLD",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "345",
-          fromDate: "05/09/2025",
-          thruDate: "08/21/2027",
-        },
-        {
-          id: 7,
-          cardHolder: "Will Ocanto",
-          cardColor: "TITANIUM",
-          cardType: "DEBIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "901",
-          fromDate: "01/01/2025",
-          thruDate: "01/01/2027",
-        },
-        {
-          id: 8,
-          cardHolder: "Will Ocanto",
-          cardColor: "SILVER",
-          cardType: "DEBIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "223",
-          fromDate: "12/01/2025",
-          thruDate: "08/01/2027",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "Melba",
-      lastName: "Morel",
-      email: "melba@mindhub.com",
-      accounts: [
-        {
-          id: 3,
-          number: "VIN003",
-          balance: "50000.0",
-          creationDate: "09/21/2021",
-          transactions: [
-            {
-              id: 7,
-              transactiontype: "CREDIT",
-              amount: 25000.0,
-              dateTransaction: "12/03/2023",
-              description: "Payment",
-            },
-            {
-              id: 8,
-              transactiontype: "DEBIT",
-              amount: -7500.0,
-              dateTransaction: "02/06/2023",
-              description: "Test credit",
-            },
-            {
-              id: 9,
-              transactiontype: "DEBIT",
-              amount: -8500.0,
-              dateTransaction: "12/05/2023",
-              description: "Cable payment",
-            },
-          ],
-        },
-        {
-          id: 4,
-          number: "VIN004",
-          balance: "200000.0",
-          creationDate: "03/29/2023",
-          transactions: [
-            {
-              id: 10,
-              transactiontype: "CREDIT",
-              amount: 123000.0,
-              dateTransaction: "01/03/2022",
-              description: "Cable",
-            },
-            {
-              id: 11,
-              transactiontype: "DEBIT",
-              amount: -45000.0,
-              dateTransaction: "05/16/2023",
-              description: "Food shopping",
-            },
-            {
-              id: 12,
-              transactiontype: "CREDIT",
-              amount: 11500.0,
-              dateTransaction: "08/23/2023",
-              description: "Debt payment",
-            },
-          ],
-        },
-      ],
-      loans: [
-        {
-          id: 2,
-          loanid: 2,
-          name: "Personal",
-          amount: "$ 10000.0",
-          payments: 12,
-          creationDate: "01/01/2021",
-        },
-        {
-          id: 1,
-          loanid: 1,
-          name: "Automotive",
-          amount: "$ 200000.0",
-          payments: 6,
-          creationDate: "01/01/2023",
-        },
-      ],
-      cards: [
-        {
-          id: 2,
-          cardHolder: "Melba Morel",
-          cardColor: "TITANIUM",
-          cardType: "CREDIT",
-          cardNumber: "1234-8356-2625-9840",
-          cvv: "123",
-          fromDate: "01/01/2025",
-          thruDate: "01/01/2027",
-        },
-        {
-          id: 1,
-          cardHolder: "Melba Morel",
-          cardColor: "GOLD",
-          cardType: "DEBIT",
-          cardNumber: "1234-8552-29946-1234",
-          cvv: "456",
-          fromDate: "08/11/2025",
-          truDate: "03/01/2027",
-        },
-      ],
-    },
-  ]);
+  const confirmRequestAccount = () => {
+    setMessage(""); // Reiniciar el mensaje
+    setVisible(true); // Hacerlo visible al solicitar
+    const token = localStorage.getItem("token");
 
-  const [clientId, setClientId] = useState(1);
+    axios
+      .post(
+        `http://localhost:8080/api/accounts/clients/current/accounts`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setMessage(response.data);
+        dispatch(updateAccounts());
+        setTimeout(() => {
+          setVisible(false);
+        }, 5000);
+      })
+      .catch((error) => {
+        setMessage(error.response.data);
+        setTimeout(() => {
+          setVisible(false);
+        }, 5000);
+      });
+
+    setIsModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    dispatch(updateAccounts());
+    dispatch(loadUser());
+  }, [dispatch]);
 
   return (
-    <main className="border border-solid min-h-[calc(100vh-23vh)] bg-[#48a6f4]">
-      <h1 className="border border-solid border-[#f2c036] text-4xl font-bold text-center mt-8 bg-[#16374e] text-white w-[40vw] py-2 text-center mx-auto my-10 shadow-[8px_8px_6px_rgba(0,0,0,0.7)] rounded-xl">
-        Welcome {clients[clientId - 1].name}!
+    <main className="border border-solid min-h-[calc(100vh-23vh)] bg-[#D9D9D9]">
+      <h1 className="text-shadow border-2 border-solid border-[#4C4C4A] underline text-4xl font-bold text-center mt-6 bg-[#16374e] text-white w-[38vw] h-[10vh] py-1 text-center mx-auto rounded-lg">
+        Welcome {client.firstName} {client.lastName} !
       </h1>
       <img
-        className="w-full h-[310px] mx-auto mt-10 object-cover object-bottom border-b border-t border-solid shadow-[0px_10px_7px_rgba(0,0,0,0.8)]"
+        className="w-full h-[36vh] mx-auto mt-4 object-cover object-bottom border-b border-t border-solid shadow-[0px_10px_7px_rgba(0,0,0,0.8)]"
         src="./banner2.png"
         alt="banner"
       />
 
-      <CardButtomContainer className="flex justify-center items-center gap-18 mx-10 my-14">
-        <CardContainer className="flex justify-center gap-16 flex-wrap w-[900px]">
-          {clients[clientId - 1].accounts.map((account) => (
-            <CardAccounts
-              stylePayments="hidden"
-              styleDate="text-lg"
-              link={`/account/${account.id}`}
-              title="Account number:"
-              content={account.number}
-              amount={account.balance}
-              creationDate={account.creationDate}
-            />
-          ))}
+      <BannerTextImg
+        ContainerStyle="flex justify-evenly items-center px-16 w-full h-[46vh] border-t-2 border-b-2 border-solid border-black mt-6 bg-[#16374e] text-white p-4"
+        ContainerTextStyle="flex flex-col justify-center items-center gap-4"
+        titleStyle="text-2xl fonnt-bold underline"
+        title="Welcome to Bank Ease!"
+        textStyle="text-xl"
+        text="On this page you can:"
+        ulStyle="inline"
+      >
+        <ImgButtom
+          imgStyle="w-[20vw] h-[30vh] rounded-xl shadow-[6px_6px_6px_rgba(0,0,0,0.8)]"
+          imgSrc="./alcancia.jpg"
+          imgAlt="piggy-bank"
+        >
+          <RequestButtom
+            className="w-[15vw] h-[8vh] border border-solid border-[#4C4C4A] bg-[#A1ADAD] text-black font-bold shadow-[6px_7px_3px_rgba(0,0,0,0.9)] transition-colors duration-[0.7s] hover:border-2 transition-transform hover:translate-y-[-10px] text-xl rounded-3xl"
+            text="Request account"
+            onClick={handleOpenModal}
+          />
+        </ImgButtom>
+      </BannerTextImg>
+
+      <CardButtomContainer className="flex flex-col justify-center items-center gap-6 w-full h-[55vh]">
+        {visible && (
+          <span
+            className={`text-xl ${
+              message === "Account created" ? "text-[#06D001]" : "text-red-700"
+            } font-bold text-center`}
+          >
+            {message}
+          </span>
+        )}
+
+        <CardContainer className="flex justify-center gap-10 flex-wrap w-full">
+          {client.accounts.map((account) => {
+            const dateObject = new Date(account.creationDate);
+            const options = { year: "numeric", month: "long", day: "numeric" };
+            const formattedDate = dateObject.toLocaleDateString(
+              "en-US",
+              options
+            );
+            const formattedbalance = account.balance.toLocaleString("en-US", {
+              style: "decimal",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            });
+            return (
+              <CardAccounts
+                stylePayments="hidden"
+                styleDate="text-lg"
+                divSize="w-[380px] h-[260px] shadow-[6px_6px_6px_rgba(0,0,0,0.8)] transition-transform hover:translate-y-[-17px] transition-colors duration-[0.7s]"
+                balanceOrAmount="Balance:"
+                showLink={true}
+                link={`/account/${account.id}`}
+                title="Account number:"
+                content={account.number}
+                amount={formattedbalance}
+                creationDate={formattedDate}
+              />
+            );
+          })}
         </CardContainer>
       </CardButtomContainer>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={confirmRequestAccount}
+        message="Are you sure you want to request an account?"
+        modalStyle="flex flex-col justify-center items-center gap-4 fixed bg-[#5F6F65] border-2 border-solid border-[#3C3D37] text-white pt-2 top-0 left-0 right-0 bottom-0  w-[30vw] h-[25vh] m-auto rounded-xl text-shadow"
+      />
     </main>
   );
 }
 
 export default Accounts;
-
-{
-  /* <CardButtomContainer className="flex justify-center items-center gap-18 mx-10 my-14">
-<CardContainer className="flex justify-center gap-16 flex-wrap w-[900px]">
-  {clients[clientId - 1].accounts.map((account) => (
-    <CardAccounts
-      stylePayments="hidden"
-      styleDate="text-lg"
-      link={`/account/${account.id}`}
-      title="Account number:"
-      content={account.number}
-      amount={account.balance}
-      creationDate={account.creationDate}
-    />
-  ))}
-</CardContainer>
-</CardButtomContainer> */
-}

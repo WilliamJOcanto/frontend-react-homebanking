@@ -1,11 +1,17 @@
-table,
+table {
+  border-collapse: separate; /* Asegúrate de que los bordes no colapsen */
+  border-spacing: 0; /* Elimina espacios entre celdas */
+  border-radius: 10px; /* Ajusta el valor según lo que desees */
+  overflow: hidden; /* Esto ayuda a aplicar el radio a las celdas */
+  width: 55vw; /* Asegúrate de mantener el ancho aquí o en el contenedor */
+}
+
 tbody,
 th,
 td,
 tr {
-  border: 3px solid black;
-  background-color: #f2c036;
-  width: 40vw;
+  border: 1px solid #4c4c4a;
+  background-color: #a1adad;
   padding: 16px;
   font-weight: bold;
 }
