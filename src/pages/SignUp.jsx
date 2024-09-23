@@ -33,7 +33,10 @@ function SignUp() {
     console.log(userRegister);
 
     axios
-      .post("http://localhost:8080/api/auth/register", userRegister)
+      .post(
+        "https://backend-java-homebanking.onrender.com/api/auth/register",
+        userRegister
+      )
       .then((response) => {
         console.log(response);
         navigate("/sign-in", { state: { message: response.data + " !" } });

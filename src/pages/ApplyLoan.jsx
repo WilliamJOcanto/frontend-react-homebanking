@@ -52,11 +52,15 @@ function ApplyLoan() {
     const token = localStorage.getItem("token");
 
     axios
-      .post("http://localhost:8080/api/loans", loanApplication, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        "https://backend-java-homebanking.onrender.com/api/loans",
+        loanApplication,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         setMessage(response.data);
         navigate(`/account/${idAccount}`, {

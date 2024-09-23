@@ -46,11 +46,15 @@ function MakeTransaction() {
     const token = localStorage.getItem("token");
 
     axios
-      .post("http://localhost:8080/api/transactions", makeTransaction, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        "https://backend-java-homebanking.onrender.com/api/transactions",
+        makeTransaction,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         console.log(response.data);
         navigate(`/account/${idAccount}`, {

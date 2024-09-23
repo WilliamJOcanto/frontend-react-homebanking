@@ -28,7 +28,7 @@ function Accounts() {
 
     axios
       .post(
-        `http://localhost:8080/api/accounts/clients/current/accounts`,
+        `https://backend-java-homebanking.onrender.com/api/accounts/clients/current/accounts`,
         {},
         {
           headers: {

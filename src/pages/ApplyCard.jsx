@@ -30,11 +30,15 @@ function ApplyCard() {
     const token = localStorage.getItem("token");
 
     axios
-      .post("http://localhost:8080/api/clients/current/cards", user, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        "https://backend-java-homebanking.onrender.com/api/clients/current/cards",
+        user,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         setMessage(response.data);
         navigate("/cards", {

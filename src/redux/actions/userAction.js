@@ -6,7 +6,7 @@ export const loadUser = createAsyncThunk("loadUser", async () => {
 
   try {
     const userCurrent = await axios.get(
-      "http://localhost:8080/api/auth/current",
+      "https://backend-java-homebanking.onrender.com/api/auth/current",
       {
         headers: {
           Authorization: `Bearer ${token}`,
