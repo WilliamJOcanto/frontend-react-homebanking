@@ -28,7 +28,7 @@ export const updateAccounts = createAsyncThunk("updateAccounts", async () => {
 
   try {
     const accounts = await axios.get(
-      "http://localhost:8080/api/accounts/clients/current/accounts",
+      "https://backend-java-homebanking.onrender.com/api/accounts/clients/current/accounts",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ export const updateCards = createAsyncThunk("updateCards", async () => {
 
   try {
     const cards = await axios.get(
-      "http://localhost:8080/api/clients/current/cards",
+      "https://backend-java-homebanking.onrender.com/api/clients/current/cards",
       {
         headers: {
           Authorization: `Bearer ${token}`,
