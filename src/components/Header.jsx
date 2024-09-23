@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../components/Nav";
-import ImgLogo from "../components/imgLogo";
+import ImgLogo from "../components/ImgLogo";
 
 function Header() {
   return (

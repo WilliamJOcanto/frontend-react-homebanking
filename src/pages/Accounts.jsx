@@ -59,7 +59,7 @@ function Accounts() {
 
   useEffect(() => {
     dispatch(updateAccounts());
-    dispatch(loadUser());
+    // dispatch(loadUser());
   }, [dispatch]);
 
   return (
