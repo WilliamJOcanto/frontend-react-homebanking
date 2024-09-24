@@ -72,6 +72,7 @@ function Account() {
                       balanceOrAmount="Balance:"
                       showLink={false}
                       title="Account number:"
+                      StylePerMonth="hidden"
                       content={account.number}
                       amount={formattedBalance}
                       creationDate={new Date(

@@ -102,19 +102,28 @@ function Loans() {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             });
+            const paymentsPerMonth = loan.amount / loan.payments;
+            const formattedPaymentsPerMonth = paymentsPerMonth.toLocaleString(
+              "en-US",
+              {
+                style: "decimal",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }
+            );
             return (
               <CardAccounts
                 title="Type of Loan:"
                 styleDate="hidden"
                 stylePayments="text-xl"
-                divSize="w-[300px] h-[310px] transition-transform hover:translate-y-[-17px] transition-colors duration-[0.7s]"
+                divSize="min-w-[300px] min-h-[310px] transition-transform hover:translate-y-[-17px] transition-colors duration-[0.7s]"
                 balanceOrAmount="Balance to pay:"
                 showLink={false}
                 payments={loan.payments}
                 content={loan.name}
                 amount={formattedMaxAmount}
                 textPayments="Selected installment:"
-                paymentPerMonth={loan.amount / loan.payments}
+                paymentPerMonth={formattedPaymentsPerMonth}
                 StylePerMonth="flex justify-between gap-4 items-center w-full text-lg mt-4"
               />
             );
