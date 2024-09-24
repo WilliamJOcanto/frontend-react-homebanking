@@ -19,8 +19,6 @@ function Account() {
   const message = location.state?.message;
   const [visible, setVisible] = useState(true);
 
-  console.log(message);
-
   useEffect(() => {
     dispatch(updateAccounts());
   }, [dispatch]);

@@ -8,8 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadLoans } from "../redux/actions/loanAction";
 import BannerTextImg from "../components/BannerTextImg";
 import ImgButtom from "../components/ImgButtom";
+import { loadUser } from "../redux/actions/userAction";
 
 function Loans() {
+  const clientLoan = useSelector((state) => state.userReducer.userData.loans);
   const allLoans = useSelector((state) => state.loanReducer.availableLoans);
   const dispatch = useDispatch();
 
@@ -17,6 +19,7 @@ function Loans() {
 
   useEffect(() => {
     dispatch(loadLoans());
+    dispatch(loadUser());
   }, [dispatch]);
 
   return (
@@ -49,7 +52,9 @@ function Loans() {
             )}
           </ImgButtom>
         </BannerTextImg>
-
+        <p className="text-shadow rounded-lg text-4xl underline text-white font-bold w-[35vw] h-[9vh] pt-1 text-center border-2 border-solid border-[#4C4C4A] bg-[#16374e] mx-auto">
+          Loans Availables
+        </p>
         <CardContainer className="flex justify-center items-center gap-16 flex-wrap w-[90vw] mx-auto">
           {Array.isArray(allLoans) && allLoans.length > 0 ? (
             allLoans.map((loan) => {
@@ -72,16 +77,55 @@ function Loans() {
                   payments={loan.payments.join(", ")}
                   content={loan.name}
                   amount={formattedMaxAmount}
+                  textPayments="Installments:"
+                  StylePerMonth="hidden"
                 />
               );
             })
           ) : (
             <p className="text-center text-red-700 font-bold text-xl">
-              {allLoans}
+              You have already applied for all the loans available on the
+              platform! Currently, there are no other options for you at this
+              time.
             </p>
           )}
         </CardContainer>
+        <span className="text-shadow rounded-lg text-4xl underline text-white font-bold w-[25vw] h-[9vh] pt-1 text-center border-2 border-solid border-[#4C4C4A] bg-[#16374e] mx-auto">
+          Your loans
+        </span>
       </CardButtomContainer>
+      <div className="flex justify-center items-center gap-16 flex-wrap w-[90vw] mx-auto my-6">
+        {Array.isArray(clientLoan) && clientLoan.length > 0 ? (
+          clientLoan.map((loan) => {
+            const formattedMaxAmount = loan.amount.toLocaleString("en-US", {
+              style: "decimal",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            });
+            return (
+              <CardAccounts
+                title="Type of Loan:"
+                styleDate="hidden"
+                stylePayments="text-xl"
+                divSize="w-[300px] h-[310px] transition-transform hover:translate-y-[-17px] transition-colors duration-[0.7s]"
+                balanceOrAmount="Balance to pay:"
+                showLink={false}
+                payments={loan.payments}
+                content={loan.name}
+                amount={formattedMaxAmount}
+                textPayments="Selected installment:"
+                paymentPerMonth={loan.amount / loan.payments}
+                StylePerMonth="flex justify-between gap-4 items-center w-full text-lg mt-4"
+              />
+            );
+          })
+        ) : (
+          <p className="text-center text-red-700 font-bold text-xl">
+            You do not have loans requested yet. You can request it by clicking
+            on the 'Apply loan' button
+          </p>
+        )}
+      </div>
     </main>
   );
 }

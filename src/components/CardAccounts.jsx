@@ -24,12 +24,17 @@ function CardAccounts(props) {
           <span className="text-2xl ml-12 my-2">{props.content}</span>
           <p className="my-2 text-lg">{props.balanceOrAmount}</p>
           <p className="text-3xl text-center mb-6">${props.amount}</p>
-          <span className={props.stylePayments}>Monthly payments:</span>
+          <span className={props.stylePayments}>{props.textPayments}</span>
           <span style={{ marginLeft: "10px" }}>{props.payments}</span>
-          <p className={props.styleDate}>
+          <div className={props.StylePerMonth}>
+            <span>Payment per month:</span>
+            <span>${props.paymentPerMonth}</span>
+          </div>
+
+          <div className={props.styleDate}>
             <span>Creation date:</span>
             <span style={{ marginLeft: "10px" }}>{props.creationDate}</span>
-          </p>
+          </div>
         </>
       )}
     </div>

@@ -30,6 +30,11 @@ function Cards() {
     return () => clearTimeout(timer);
   }, []);
 
+  // useEffect(() => {
+  //   if (message) {
+  //     alert(message);
+  //   }
+  // }, [message]);
   return (
     <main className="border border-solid min-h-[calc(100vh-23vh)] bg-[#D9D9D9]">
       <h1 className="text-shadow border-2 border-solid border-[#4C4C4A] underline text-4xl bg-[#16374e] font-bold text-white w-[23vw] h-[10vh] py-1 text-center mx-auto my-4 rounded-lg">
@@ -100,12 +105,13 @@ function Cards() {
 
                   return (
                     <PlasticCard
-                      className={`shadow-[7px_7px_5px_rgba(0,0,0,0.7)] ${backgroundCard} bg-no-repeat bg-cover bg-center flex flex-col gap-5 flex-wrap w-[350px] h-[210px] p-4 border border-solid border-black rounded-xl font-bold ${textColor}`}
+                      className={`shadow-[7px_7px_5px_rgba(0,0,0,0.7)] ${backgroundCard} bg-no-repeat bg-cover bg-center flex flex-col gap-2 flex-wrap w-[350px] h-[215px] p-4 border border-solid border-black rounded-xl font-bold ${textColor}`}
                       type="Credit Card"
                       number={card.cardNumber}
                       cvv={card.cvv}
                       cardHolder={card.cardHolder}
                       truDate={card.thruDate}
+                      fromDate={card.fromDate}
                     />
                   );
                 })}
@@ -148,12 +154,13 @@ function Cards() {
 
                   return (
                     <PlasticCard
-                      className={`shadow-[7px_7px_5px_rgba(0,0,0,0.7)] ${backgroundCard} bg-no-repeat bg-cover bg-center flex flex-col gap-5 flex-wrap w-[350px] h-[210px] p-4 border border-solid border-black rounded-xl font-bold ${textColor}`}
+                      className={`shadow-[7px_7px_5px_rgba(0,0,0,0.7)] ${backgroundCard} bg-no-repeat bg-cover bg-center flex flex-col gap-2 flex-wrap w-[350px] h-[215px] p-4 border border-solid border-black rounded-xl font-bold ${textColor}`}
                       type="Debit Card"
                       number={card.cardNumber}
                       cvv={card.cvv}
                       cardHolder={card.cardHolder}
                       truDate={card.thruDate}
+                      fromDate={card.fromDate}
                     />
                   );
                 })}

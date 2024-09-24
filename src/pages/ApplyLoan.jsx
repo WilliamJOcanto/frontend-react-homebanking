@@ -145,8 +145,7 @@ function ApplyLoan() {
           divStyle="w-[30vw]"
           arrayItems={allLoans
             .filter((loan) => loan.name === loanSelected)
-            .flatMap((loan) => loan.payments)
-            .map((payment) => payment.toString())}
+            .flatMap((loan) => loan.payments)}
           onChange={(e) => setPayments(Number(e.target.value))}
         />
 
