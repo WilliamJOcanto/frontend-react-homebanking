@@ -17,7 +17,15 @@ function ApplyCard() {
 
   const handleOpenModal = (e) => {
     e.preventDefault();
-    setIsModalOpen(true);
+
+    // Verificar si los campos están vacíos
+    if (!cardType && !cardMembership) {
+      setMessage("No fields have been filled out.");
+      return; // No abrir el modal
+    }
+
+    setMessage(""); // Reiniciar mensaje
+    setIsModalOpen(true); // Abrir el modal
   };
   const confirmApplyCard = async (e) => {
     e.preventDefault();
@@ -100,7 +108,7 @@ function ApplyCard() {
         onClose={handleCloseModal}
         onConfirm={confirmApplyCard}
         message="Are you sure you want to request a card of the selected type and membership? This action cannot be undone."
-        modalStyle="flex flex-col justify-center items-center gap-4 fixed bg-[#5F6F65] border-2 border-solid border-[#3C3D37] text-white pt-2 px-2 top-0 left-0 right-0 bottom-0 w-[36vw] h-[30vh] m-auto rounded-xl text-shadow"
+        modalStyle="flex flex-col justify-center items-center gap-4 fixed bg-[#5F6F65] border-2 border-solid border-[#3C3D37] text-white pt-2 px-2 top-[250px] left-[210px] w-[36vw] h-[30vh] rounded-xl text-shadow"
       />
     </main>
   );

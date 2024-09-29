@@ -17,6 +17,13 @@ function SignUp() {
 
   const handleOpenModal = (e) => {
     e.preventDefault();
+
+    if (!firstName && !lastName && !email && !password) {
+      setMessage("No fields have been filled out.");
+      return; // No abrir el modal
+    }
+
+    setMessage("");
     setIsModalOpen(true);
   };
 
@@ -128,7 +135,7 @@ function SignUp() {
         onClose={handleCloseModal}
         onConfirm={confirmRegister}
         message=" If you are sure the information is correct, click 'Confirm'. If you want to make changes, select 'Cancel'."
-        modalStyle="flex flex-col justify-center items-center gap-4 fixed bg-[#5F6F65] border-2 border-solid border-[#9CA986] text-white pt-2 px-2 top-0 left-0 right-0 bottom-0 w-[36vw] h-[30vh] m-auto rounded-xl text-shadow"
+        modalStyle="flex flex-col justify-center items-center gap-4 fixed bg-[#5F6F65] border-2 border-solid border-[#9CA986] text-white pt-2 px-2 top-[200px] right-[250px] w-[36vw] h-[30vh] rounded-xl text-shadow"
       />
     </main>
   );
